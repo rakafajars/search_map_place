@@ -18,6 +18,7 @@ class SearchMapPlaceWidget extends StatefulWidget {
     this.darkMode = false,
     this.key,
     this.textStyleInputDecoration,
+    this.margin,
   })  : assert((location == null && radius == null) ||
             (location != null && radius != null)),
         super(key: key);
@@ -76,6 +77,9 @@ class SearchMapPlaceWidget extends StatefulWidget {
 
   // TextStyle
   final TextStyle textStyleInputDecoration;
+
+  // Margin
+  final EdgeInsetsGeometry margin;
 
   @override
   _SearchMapPlaceWidgetState createState() => _SearchMapPlaceWidgetState();
@@ -155,7 +159,13 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
         builder: (context, _) {
           return Container(
             height: _containerHeight.value,
-            decoration: _containerDecoration(),
+            margin: widget.margin,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
             child: Column(
               children: <Widget>[
                 Padding(
@@ -188,7 +198,15 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
         children: <Widget>[
           Expanded(
             child: TextField(
-              decoration: _inputStyle(),
+              decoration: InputDecoration(
+                hintText: this.widget.placeholder,
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 0.0,
+                  vertical: 0.0,
+                ),
+                hintStyle: widget.textStyleInputDecoration,
+              ),
               controller: _textEditingController,
               onSubmitted: (_) => _selectPlace(),
               onEditingComplete: _selectPlace,
@@ -240,18 +258,6 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
           vertical: 0,
         ),
       ),
-    );
-  }
-
-  /*
-  STYLING
-  */
-  InputDecoration _inputStyle() {
-    return InputDecoration(
-      hintText: this.widget.placeholder,
-      border: InputBorder.none,
-      contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-      hintStyle: widget.textStyleInputDecoration,
     );
   }
 
