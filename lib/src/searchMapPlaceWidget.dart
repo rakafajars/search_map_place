@@ -182,7 +182,7 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                              prefixIcon: widget.suffixIcon,
+                              prefixIcon: widget.prefixIcon,
                               hintText: this.widget.placeholder,
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.symmetric(
