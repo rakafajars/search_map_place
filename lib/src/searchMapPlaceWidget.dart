@@ -171,53 +171,47 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
               ),
               child: Column(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12.0,
-                      right: 12.0,
-                      top: 4,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: widget.prefixIcon,
-                              hintText: this.widget.placeholder,
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 0.0,
-                                vertical: 0.0,
-                              ),
-                              hintStyle: widget.textStyleInputDecoration,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: widget.prefixIcon,
+                            hintText: this.widget.placeholder,
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 0.0,
+                              vertical: 0.0,
                             ),
-                            controller: _textEditingController,
-                            onSubmitted: (_) => _selectPlace(),
-                            onEditingComplete: _selectPlace,
-                            autofocus: false,
-                            focusNode: _fn,
+                            hintStyle: widget.textStyleInputDecoration,
+                          ),
+                          controller: _textEditingController,
+                          onSubmitted: (_) => _selectPlace(),
+                          onEditingComplete: _selectPlace,
+                          autofocus: false,
+                          focusNode: _fn,
+                        ),
+                      ),
+                      Container(width: 15),
+                      if (widget.hasClearButton)
+                        GestureDetector(
+                          onTap: () {
+                            if (_crossFadeState == CrossFadeState.showSecond)
+                              _textEditingController.clear();
+                          },
+                          // child: Icon(_inputIcon, color: this.widget.iconColor),
+                          child: AnimatedCrossFade(
+                            crossFadeState: _crossFadeState,
+                            duration: Duration(milliseconds: 300),
+                            firstChild: Container(),
+                            secondChild:
+                                Icon(Icons.clear, color: widget.iconColor),
                           ),
                         ),
-                        Container(width: 15),
-                        if (widget.hasClearButton)
-                          GestureDetector(
-                            onTap: () {
-                              if (_crossFadeState == CrossFadeState.showSecond)
-                                _textEditingController.clear();
-                            },
-                            // child: Icon(_inputIcon, color: this.widget.iconColor),
-                            child: AnimatedCrossFade(
-                              crossFadeState: _crossFadeState,
-                              duration: Duration(milliseconds: 300),
-                              firstChild: Container(),
-                              secondChild:
-                                  Icon(Icons.clear, color: widget.iconColor),
-                            ),
-                          ),
-                        // if (!widget.hasClearButton) Icon(widget.icon, color: widget.iconColor)
-                        if (!widget.hasClearButton) Container()
-                      ],
-                    ),
+                      // if (!widget.hasClearButton) Icon(widget.icon, color: widget.iconColor)
+                      if (!widget.hasClearButton) Container()
+                    ],
                   ),
                   if (_placePredictions.length > 0)
                     Opacity(
@@ -234,98 +228,7 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
             );
           },
         ),
-
-        // _searchContainer(
-        //   child: _searchInput(context),
-        // ),
       );
-
-  /*
-  WIDGETS
-  */
-  // Widget _searchContainer({Widget child}) {
-  //   return AnimatedBuilder(
-  //     animation: _animationController,
-  //     builder: (context, _) {
-  //       return Container(
-  //         height: _containerHeight.value,
-  //         margin: widget.margin,
-  //         decoration: BoxDecoration(
-  //           color: Colors.white,
-  //           borderRadius: BorderRadius.all(
-  //             Radius.circular(10),
-  //           ),
-  //         ),
-  //         child: Column(
-  //           children: <Widget>[
-  //             Padding(
-  //               padding: const EdgeInsets.only(
-  //                 left: 12.0,
-  //                 right: 12.0,
-  //                 top: 4,
-  //               ),
-  //               child: child,
-  //             ),
-  //             if (_placePredictions.length > 0)
-  //               Opacity(
-  //                 opacity: _listOpacity.value,
-  //                 child: Column(
-  //                   children: <Widget>[
-  //                     for (var prediction in _placePredictions)
-  //                       _placeOption(Place.fromJSON(prediction, geocode)),
-  //                   ],
-  //                 ),
-  //               ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Widget _searchInput(BuildContext context) {
-  //   return Center(
-  //     child: Row(
-  //       children: <Widget>[
-  //         Expanded(
-  //           child: TextField(
-  //             decoration: InputDecoration(
-  //               hintText: this.widget.placeholder,
-  //               border: InputBorder.none,
-  //               contentPadding: EdgeInsets.symmetric(
-  //                 horizontal: 0.0,
-  //                 vertical: 0.0,
-  //               ),
-  //               hintStyle: widget.textStyleInputDecoration,
-  //             ),
-  //             controller: _textEditingController,
-  //             onSubmitted: (_) => _selectPlace(),
-  //             onEditingComplete: _selectPlace,
-  //             autofocus: false,
-  //             focusNode: _fn,
-  //           ),
-  //         ),
-  //         Container(width: 15),
-  //         if (widget.hasClearButton)
-  //           GestureDetector(
-  //             onTap: () {
-  //               if (_crossFadeState == CrossFadeState.showSecond)
-  //                 _textEditingController.clear();
-  //             },
-  //             // child: Icon(_inputIcon, color: this.widget.iconColor),
-  //             child: AnimatedCrossFade(
-  //               crossFadeState: _crossFadeState,
-  //               duration: Duration(milliseconds: 300),
-  //               firstChild: Container(),
-  //               secondChild: Icon(Icons.clear, color: widget.iconColor),
-  //             ),
-  //           ),
-  //         // if (!widget.hasClearButton) Icon(widget.icon, color: widget.iconColor)
-  //         if (!widget.hasClearButton) Container()
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _placeOption(Place prediction) {
     String place = prediction.description;
