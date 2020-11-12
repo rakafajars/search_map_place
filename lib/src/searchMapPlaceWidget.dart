@@ -173,6 +173,7 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
                 children: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
                         child: TextField(
