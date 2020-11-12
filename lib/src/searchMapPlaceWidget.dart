@@ -170,6 +170,8 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
                 ),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
