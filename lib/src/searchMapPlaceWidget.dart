@@ -19,7 +19,7 @@ class SearchMapPlaceWidget extends StatefulWidget {
     this.key,
     this.textStyleInputDecoration,
     this.margin,
-    this.suffixIcon,
+    this.prefixIcon,
     this.height,
     this.width,
   })  : assert((location == null && radius == null) ||
@@ -85,7 +85,7 @@ class SearchMapPlaceWidget extends StatefulWidget {
   final EdgeInsetsGeometry margin;
 
   // icon
-  final Widget suffixIcon;
+  final Widget prefixIcon;
 
   final double width;
 
@@ -182,7 +182,7 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                              suffixIcon: widget.suffixIcon,
+                              prefixIcon: widget.suffixIcon,
                               hintText: this.widget.placeholder,
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.symmetric(
