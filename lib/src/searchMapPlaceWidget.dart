@@ -170,51 +170,54 @@ class _SearchMapPlaceWidgetState extends State<SearchMapPlaceWidget>
                 ),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: widget.prefixIcon,
-                            hintText: this.widget.placeholder,
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 0.0,
-                              vertical: 0.0,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 12.0,
+                      right: 12.0,
+                      top: 4,
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              prefixIcon: widget.prefixIcon,
+                              hintText: this.widget.placeholder,
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 0.0,
+                                vertical: 0.0,
+                              ),
+                              hintStyle: widget.textStyleInputDecoration,
                             ),
-                            hintStyle: widget.textStyleInputDecoration,
-                          ),
-                          controller: _textEditingController,
-                          onSubmitted: (_) => _selectPlace(),
-                          onEditingComplete: _selectPlace,
-                          autofocus: false,
-                          focusNode: _fn,
-                        ),
-                      ),
-                      Container(width: 15),
-                      if (widget.hasClearButton)
-                        GestureDetector(
-                          onTap: () {
-                            if (_crossFadeState == CrossFadeState.showSecond)
-                              _textEditingController.clear();
-                          },
-                          // child: Icon(_inputIcon, color: this.widget.iconColor),
-                          child: AnimatedCrossFade(
-                            crossFadeState: _crossFadeState,
-                            duration: Duration(milliseconds: 300),
-                            firstChild: Container(),
-                            secondChild:
-                                Icon(Icons.clear, color: widget.iconColor),
+                            controller: _textEditingController,
+                            onSubmitted: (_) => _selectPlace(),
+                            onEditingComplete: _selectPlace,
+                            autofocus: false,
+                            focusNode: _fn,
                           ),
                         ),
-                      // if (!widget.hasClearButton) Icon(widget.icon, color: widget.iconColor)
-                      if (!widget.hasClearButton) Container()
-                    ],
+                        Container(width: 15),
+                        if (widget.hasClearButton)
+                          GestureDetector(
+                            onTap: () {
+                              if (_crossFadeState == CrossFadeState.showSecond)
+                                _textEditingController.clear();
+                            },
+                            // child: Icon(_inputIcon, color: this.widget.iconColor),
+                            child: AnimatedCrossFade(
+                              crossFadeState: _crossFadeState,
+                              duration: Duration(milliseconds: 300),
+                              firstChild: Container(),
+                              secondChild:
+                                  Icon(Icons.clear, color: widget.iconColor),
+                            ),
+                          ),
+                        // if (!widget.hasClearButton) Icon(widget.icon, color: widget.iconColor)
+                        if (!widget.hasClearButton) Container()
+                      ],
+                    ),
                   ),
                   if (_placePredictions.length > 0)
                     Opacity(
